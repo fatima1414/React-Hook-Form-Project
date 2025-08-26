@@ -63,7 +63,7 @@ function PetAdoptionForm() {
           {/* Preferred Pets */}
           <div className="mb-3">
             <label className="form-label fw-bold">Preferred Pets</label><br />
-
+            
             <label className="me-3">
               <input
                 type="checkbox"
