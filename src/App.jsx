@@ -11,7 +11,6 @@ function PetAdoptionForm() {
     adoptionDate: "",
   });
 
-
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
@@ -35,6 +34,8 @@ function PetAdoptionForm() {
     e.preventDefault();
     console.log("Submitted Data:", formData);
 
+
+
     setFormData({
       fullName: "",
       gender: "",
@@ -50,7 +51,9 @@ function PetAdoptionForm() {
       <div className="card shadow p-4">
         <h3 className="text-center text-danger mb-4">Pet Adoption Form</h3>
 
-        <form onSubmit={handleSubmit}>
+
+
+        <form onSubmit={handleSubmit} noValidate>
 
           <div className="mb-3">
             <label className="form-label fw-bold">Your Full Name</label>
@@ -59,9 +62,8 @@ function PetAdoptionForm() {
               name="fullName"
               value={formData.fullName}
               onChange={handleChange}
-              className="form-control"
-              required
-            />
+              className="form-control" />
+
           </div>
 
 
@@ -82,7 +84,6 @@ function PetAdoptionForm() {
               <label className="form-check-label">Male</label>
             </div>
 
-
             <div className="form-check form-check-inline">
               <input
                 type="radio"
@@ -93,6 +94,7 @@ function PetAdoptionForm() {
                 className="form-check-input"
               />
               <label className="form-check-label">Female</label>
+
             </div>
 
 
@@ -152,9 +154,8 @@ function PetAdoptionForm() {
               name="petType"
               value={formData.petType}
               onChange={handleChange}
-              className="form-select"
-              required
-            >
+              className="form-select" >
+
               <option value="">Select a type</option>
               <option value="Puppy">Puppy</option>
               <option value="Kitten">Kitten</option>
@@ -170,9 +171,8 @@ function PetAdoptionForm() {
               value={formData.address}
               onChange={handleChange}
               className="form-control"
-              rows="2"
-              required
-            />
+              rows="2" />
+
           </div>
 
 
@@ -183,9 +183,8 @@ function PetAdoptionForm() {
               name="adoptionDate"
               value={formData.adoptionDate}
               onChange={handleChange}
-              className="form-control"
-              required
-            />
+              className="form-control" />
+
           </div>
 
 
@@ -197,7 +196,7 @@ function PetAdoptionForm() {
               Submit Adoption Request
             </button>
           </div>
-          
+
         </form>
       </div>
     </div>
