@@ -11,6 +11,8 @@ function PetAdoptionForm() {
     adoptionDate: "",
   });
 
+  const [submittedData, setSubmittedData] = useState(null);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
@@ -34,6 +36,8 @@ function PetAdoptionForm() {
     e.preventDefault();
     console.log("Submitted Data:", formData);
 
+  
+    setSubmittedData(formData);
 
 
     setFormData({
@@ -48,13 +52,12 @@ function PetAdoptionForm() {
 
   return (
     <div className="container mt-5">
+
       <div className="card shadow p-4">
         <h3 className="text-center text-danger mb-4">Pet Adoption Form</h3>
 
-
-
         <form onSubmit={handleSubmit} noValidate>
-
+     
           <div className="mb-3">
             <label className="form-label fw-bold">Your Full Name</label>
             <input
@@ -62,16 +65,13 @@ function PetAdoptionForm() {
               name="fullName"
               value={formData.fullName}
               onChange={handleChange}
-              className="form-control" />
-
+              className="form-control"
+            />
           </div>
 
-
+    
           <div className="mb-3">
-
-
             <label className="form-label fw-bold">Gender</label><br />
-
             <div className="form-check form-check-inline">
               <input
                 type="radio"
@@ -83,7 +83,6 @@ function PetAdoptionForm() {
               />
               <label className="form-check-label">Male</label>
             </div>
-
             <div className="form-check form-check-inline">
               <input
                 type="radio"
@@ -94,68 +93,35 @@ function PetAdoptionForm() {
                 className="form-check-input"
               />
               <label className="form-check-label">Female</label>
-
             </div>
-
-
           </div>
 
-
-
+      
           <div className="mb-3">
             <label className="form-label fw-bold">Preferred Pets</label><br />
-            <label className="me-3">
-              <input
-                type="checkbox"
-                name="pets"
-                value="Dog"
-                checked={formData.pets.includes("Dog")}
-                onChange={handleChange}
-                className="form-check-input me-1"
-              /> Dog
-            </label>
-            <label className="me-3">
-              <input
-                type="checkbox"
-                name="pets"
-                value="Cat"
-                checked={formData.pets.includes("Cat")}
-                onChange={handleChange}
-                className="form-check-input me-1"
-              /> Cat
-            </label>
-            <label className="me-3">
-              <input
-                type="checkbox"
-                name="pets"
-                value="Rabbit"
-                checked={formData.pets.includes("Rabbit")}
-                onChange={handleChange}
-                className="form-check-input me-1"
-              /> Rabbit
-            </label>
-            <label className="me-3">
-              <input
-                type="checkbox"
-                name="pets"
-                value="Bird"
-                checked={formData.pets.includes("Bird")}
-                onChange={handleChange}
-                className="form-check-input me-1"
-              /> Bird
-            </label>
+            {["Dog", "Cat", "Rabbit", "Bird"].map((pet) => (
+              <label key={pet} className="me-3">
+                <input
+                  type="checkbox"
+                  name="pets"
+                  value={pet}
+                  checked={formData.pets.includes(pet)}
+                  onChange={handleChange}
+                  className="form-check-input me-1"
+                /> {pet}
+              </label>
+            ))}
           </div>
 
-
-
+      
           <div className="mb-3">
             <label className="form-label fw-bold">Pet Type</label>
             <select
               name="petType"
               value={formData.petType}
               onChange={handleChange}
-              className="form-select" >
-
+              className="form-select"
+            >
               <option value="">Select a type</option>
               <option value="Puppy">Puppy</option>
               <option value="Kitten">Kitten</option>
@@ -171,11 +137,11 @@ function PetAdoptionForm() {
               value={formData.address}
               onChange={handleChange}
               className="form-control"
-              rows="2" />
-
+              rows="2"
+            />
           </div>
 
-
+        
           <div className="mb-3">
             <label className="form-label fw-bold">Preferred Adoption Date</label>
             <input
@@ -183,10 +149,9 @@ function PetAdoptionForm() {
               name="adoptionDate"
               value={formData.adoptionDate}
               onChange={handleChange}
-              className="form-control" />
-
+              className="form-control"
+            />
           </div>
-
 
           <div className="text-center">
             <button
@@ -195,10 +160,25 @@ function PetAdoptionForm() {
             >
               Submit Adoption Request
             </button>
+      
           </div>
 
         </form>
+
       </div>
+
+
+      {submittedData && (
+        <div className="card shadow p-4 mt-4">
+          <h4 className="text-success">Submitted Data</h4>
+          <p><b>Full Name:</b> {submittedData.fullName}</p>
+          <p><b>Gender:</b> {submittedData.gender}</p>
+          <p><b>Preferred Pets:</b> {submittedData.pets.join(", ")}</p>
+          <p><b>Pet Type:</b> {submittedData.petType}</p>
+          <p><b>Address:</b> {submittedData.address}</p>
+          <p><b>Adoption Date:</b> {submittedData.adoptionDate}</p>
+        </div>
+      )}
     </div>
   );
 }
